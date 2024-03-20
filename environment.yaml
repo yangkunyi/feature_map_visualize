@@ -176,5 +176,4 @@ dependencies:
   - pip:
       - fsspec==2024.3.1
       - opencv-python==4.9.0.80
-      - xformers==0.0.25
 prefix: /bd_byta6000i0/users/surgical_depth/miniconda3/envs/featvis
