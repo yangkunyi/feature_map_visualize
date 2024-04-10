@@ -58,31 +58,31 @@ def get_patch_size(model_type:str):
 
 
 def run(args):
-    if os.path.exists(args.input_path):
+    if os.path.exists(args.input):
         patch_size = get_patch_size(args.vit_type)
         device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 
         
-        if os.path.isfile(args.input_path):
+        if os.path.isfile(args.input):
 
-            if args.output_dir == None:
-                output_folder = os.path.dirname(args.input_path)
+            if args.output == None:
+                output_folder = os.path.dirname(args.input)
             else:
-                output_folder = args.output_dir
+                output_folder = args.output
 
-            sample_img_path = args.input_path
+            sample_img_path = args.input
 
         else:
-            if args.output_dir == None:
-                output_folder = args.input_path
+            if args.output == None:
+                output_folder = args.input
             else:
-                output_folder = args.output_dir
+                output_folder = args.output
                 
-            entries = os.listdir(args.input_path)
+            entries = os.listdir(args.input)
             file_list = []
             for entrie in entries:
-                file_list.append(os.path.join(args.input_path, entrie))
+                file_list.append(os.path.join(args.input, entrie))
 
             sample_img_path = file_list[0]
 
@@ -137,7 +137,7 @@ def run(args):
         ])
 
         # deal with one file
-        if os.path.isfile(args.input_path):
+        if os.path.isfile(args.input):
             img = transform(img)[:3].unsqueeze(0)
             img = img.to(device)
 
@@ -149,7 +149,7 @@ def run(args):
             to_pic = T.ToPILImage()
 
 
-            full_file_name = os.path.basename(args.input_path)
+            full_file_name = os.path.basename(args.input)
             file_name, file_ext = os.path.splitext(full_file_name)
             outfile = f'{file_name}_features{file_ext}'
 
@@ -180,7 +180,7 @@ def run(args):
 
     
     else:
-        print(f"Provided input path {args.input_path} doesn't exists.")
+        print(f"Provided input path {args.input} doesn't exists.")
         sys.exit(1)
 
 
