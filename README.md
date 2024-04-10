@@ -3,6 +3,8 @@ Run the following command to see the sample.
 python feature_extract.py --input_path fig --output_dir feat --denoised
 ```
 
+The runtime depends on the selected model and the input image size. Typically, it takes about 0.3s to process a image of size 518x518 with model`vit_base_patch14_dinov2.lvd142m`.
+
 
 | Argument | Description |
 | ------ | ------ |
