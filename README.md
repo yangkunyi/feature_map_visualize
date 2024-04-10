@@ -32,6 +32,6 @@ Notice that `--denoised` flag only supports `vit_base_patch16_224.dino` and `vit
 | `vit_large_patch14_reg4_dinov2.lvd142m`| ViT-L/14 distilled with registers|300 M|
 | `vit_giant_patch14_reg4_dinov2.lvd142m`| ViT-g/14 with registers|1,100 M|
 
-
+All models are put under the folder `/bd_byta6000i0/users/dataset/feat_visualize_models`.
 
 Or you can refer to the `visualize.ipynb` to see how do the functions works.
