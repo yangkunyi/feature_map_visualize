@@ -9,29 +9,35 @@ from utlis import get_denoised_features, get_features
 import re
 import torch
 from PIL import Image
+from tqdm import tqdm
 
 
 def parse_args():
     parser = argparse.ArgumentParser("extract and visualize the features")
     parser.add_argument(
+        '-t',
         "--vit_type",
         default="vit_base_patch14_dinov2.lvd142m",
         type=str,
     )
     parser.add_argument(
+        '-d',
         "--denoised",
-        default=False,
-        type=bool
+        action='store_true',
+        # type=bool
     )
     parser.add_argument(
+        '-s',
         "--vit_stride", default=14, type=int, help="patch resolution of the self.model."
     )
     parser.add_argument(
+        '-n',
         "--n_clusters", default=10, type=int, help="number of kmeans clusters."
     )
-    parser.add_argument("--input_path", required=True, type=str)
-    parser.add_argument("--output_dir", default=None, type=str)
+    parser.add_argument('-i',"--input", required=True, type=str)
+    parser.add_argument('-o',"--output", default=None, type=str)
     parser.add_argument(
+        '-r',
         "--resize",
         default=None,
         type=int,
@@ -152,7 +158,7 @@ def run(args):
         
         # deal with the whole dir
         else:
-            for img_path in file_list:
+            for idx, img_path in tqdm(enumerate(file_list), total=len(file_list)):
                 img = Image.open(img_path).convert('RGB')
                 img = transform(img)[:3].unsqueeze(0)
                 img = img.to(device)

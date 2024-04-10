@@ -200,10 +200,11 @@ class ViTWrapper(nn.Module):
                 ViTWrapper._hack_eva_intermediate_layers(),
                 self.model,
             )
-        self.model.get_intermediate_layers = types.MethodType(
-            ViTWrapper._hack_get_intermediate_layers(),
-            self.model,
-        )
+        if "dino" in self.model_type:
+            self.model.get_intermediate_layers = types.MethodType(
+                ViTWrapper._hack_get_intermediate_layers(),
+                self.model,
+            )
 
     def get_intermediate_layers(
         self,
